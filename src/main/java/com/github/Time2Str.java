@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,18 +19,17 @@ public class Time2Str {
     private static final Map<Pattern, String> patternFormatMap = new LinkedHashMap<>();
 
     static {
+        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{1,3}"), "yyyy-MM-dd HH:mm:ss.SSS");
+        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}"), "yyyy-MM-dd HH:mm:ss");
+        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}"), "yyyy-MM-dd HH:mm");
+        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}"), "yyyy-MM-dd HH");
         patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}"), "yyyy-MM-dd");
         patternFormatMap.put(Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}"), "yyyy/MM/dd");
         patternFormatMap.put(Pattern.compile("\\d{4}\\.\\d{1,2}\\.\\d{1,2}"), "yyyy.MM.dd");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}"), "yyyyMMdd");
-
-        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}"), "yyyy-MM-dd HH");
-        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}"), "yyyy-MM-dd HH:mm");
-        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}"), "yyyy-MM-dd HH:mm:ss");
-        patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{1,3}"), "yyyy-MM-dd HH:mm:ss.SSS");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHH");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHHmm");
         patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHHmmss");
+        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHHmm");
+        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHH");
+        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}"), "yyyyMMdd");
 
     }
 
@@ -62,5 +62,24 @@ public class Time2Str {
         Date date;
         date = sdf.parse(str);
         return date.getTime();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("> ");
+            if (!scanner.hasNextLine()) {
+                return;
+            }
+            String str = scanner.nextLine();
+            if (str == null) {
+                return;
+            }
+            if (StringUtils.isBlank(str)) {
+                continue;
+            }
+            String output = Time2Str.process(str);
+            System.out.println(output);
+        }
     }
 }

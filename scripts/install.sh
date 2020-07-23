@@ -11,13 +11,14 @@ if [ -z "$1" ]; then
 fi
 
 dir=$(pwd)
-mvn package
+mvn package -DtargetFile="$1"
 cd "scripts" || exit
 
+lowerArg=$(echo "$1"|tr '[:upper:]' '[:lower:]')
 installDir="/usr/local/bin/tools";
 targetDir="../target/scripts";
-targetFile="$targetDir/$1"
-jarFile="$installDir/$1".jar
+targetFile="$targetDir/$lowerArg"
+jarFile="$installDir/$lowerArg".jar
 
 if [ ! -d  $targetDir ]
 then
