@@ -12,9 +12,10 @@ fi
 
 dir=$(pwd)
 mvn package -DtargetFile="$1"
+className=$(echo "$1"|awk -F . '{print $NF}')
 cd "scripts" || exit
 
-lowerArg=$(echo "$1"|tr '[:upper:]' '[:lower:]')
+lowerArg=$(echo "$className"|tr '[:upper:]' '[:lower:]')
 installDir="/usr/local/bin/tools";
 targetDir="../target/scripts";
 targetFile="$targetDir/$lowerArg"
