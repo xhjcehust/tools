@@ -26,11 +26,6 @@ public class Time2Str {
         patternFormatMap.put(Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}"), "yyyy-MM-dd");
         patternFormatMap.put(Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}"), "yyyy/MM/dd");
         patternFormatMap.put(Pattern.compile("\\d{4}\\.\\d{1,2}\\.\\d{1,2}"), "yyyy.MM.dd");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHHmmss");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHHmm");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}"), "yyyyMMddHH");
-        patternFormatMap.put(Pattern.compile("\\d{4}\\d{1,2}\\d{1,2}"), "yyyyMMdd");
-
     }
 
     public static String process(String str) {
