@@ -12,7 +12,9 @@ public class SqlModel {
 
     private String password;
 
-    private int shardNum;
+    private int shardStartNo;
+
+    private int shardEndNo;
 
     private String sql;
 
@@ -40,12 +42,20 @@ public class SqlModel {
         this.password = password;
     }
 
-    public int getShardNum() {
-        return shardNum;
+    public int getShardStartNo() {
+        return shardStartNo;
     }
 
-    public void setShardNum(int shardNum) {
-        this.shardNum = shardNum;
+    public void setShardStartNo(int shardStartNo) {
+        this.shardStartNo = shardStartNo;
+    }
+
+    public int getShardEndNo() {
+        return shardEndNo;
+    }
+
+    public void setShardEndNo(int shardEndNo) {
+        this.shardEndNo = shardEndNo;
     }
 
     public String getSql() {

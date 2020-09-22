@@ -29,5 +29,9 @@ fi
 echo "#!/bin/sh" > "$targetFile"
 echo "java -jar $jarFile \$*" >> "$targetFile"
 chmod +x "$targetFile"
+echo "cp $targetFile $installDir"
 cp "$targetFile" "$installDir/"
+echo "cp $dir/target/tools-1.0-SNAPSHOT.jar $jarFile"
 cp "$dir/target/tools-1.0-SNAPSHOT.jar" "$jarFile"
+
+echo "finished"

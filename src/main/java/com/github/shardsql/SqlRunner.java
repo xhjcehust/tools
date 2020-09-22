@@ -30,13 +30,7 @@ public class SqlRunner {
     }
 
     public void update(SqlModel sqlModel) {
-        if (sqlModel.getShardNum() == 0) {
-            System.out.println(sqlModel.getSql());
-            jdbcTemplate.update(sqlModel.getSql());
-            return;
-        }
-
-        for (int shardId = 0; shardId < sqlModel.getShardNum(); shardId++) {
+        for (int shardId = sqlModel.getShardStartNo(); shardId <= sqlModel.getShardEndNo(); shardId++) {
             String sql = MessageFormat.format(sqlModel.getSql(), shardId);
             System.out.println(sql);
             jdbcTemplate.update(sql);
@@ -44,12 +38,7 @@ public class SqlRunner {
     }
 
     public void query(SqlModel sqlModel) {
-        if (sqlModel.getShardNum() == 0) {
-            System.out.println(sqlModel.getSql());
-            jdbcTemplate.queryForList(sqlModel.getSql());
-            return;
-        }
-        for (int shardId = 0; shardId < sqlModel.getShardNum(); shardId++) {
+        for (int shardId = sqlModel.getShardStartNo(); shardId <= sqlModel.getShardEndNo(); shardId++) {
             String sql = MessageFormat.format(sqlModel.getSql(), shardId);
             System.out.println(sql);
             List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
@@ -65,7 +54,7 @@ public class SqlRunner {
             return;
         }
 
-        if (sqlModel.getShardNum() < 0 ) {
+        if (sqlModel.getShardEndNo() < sqlModel.getShardStartNo() ) {
             System.err.println("shardNum is invalid");
             return;
         }
